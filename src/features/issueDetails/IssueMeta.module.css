@@ -1,0 +1,26 @@
+.issueState {
+    border: 2px solid;
+    border-radius: 3px;
+    padding: 0.2rem 2rem;
+}
+
+.issueState.open {
+    border-color: #7cb342;
+    background-color: #8bc34a;
+    color: #fff;
+    font-weight: 600;
+}
+
+.number {
+    color: #999;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}

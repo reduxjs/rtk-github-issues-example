@@ -1,0 +1,27 @@
+
+.issuesPagination .selected a {
+    box-shadow: 0 0 2px #1b7d9e;
+    background-color: #f3fcff;
+}
+
+.issuesPagination .disabled > a {
+    color: #ccc;
+    background-color: #f8f8f8;
+    border-color: #eee;
+    cursor: default;
+}
+
+.issuesPagination .disabled > a:hover {
+    background-color: #f8f8f8;
+}
+.issuesPagination .break {
+    margin: 0 8px;
+}
+
+.issuesPagination .previous {
+    margin-right: 1rem;
+}
+
+.issuesPagination .next {
+    margin-left: 1rem;
+}

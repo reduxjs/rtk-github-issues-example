@@ -1,0 +1,19 @@
+.issueDetailsPage .issueLabels {
+    margin-bottom: 2rem;
+}
+
+
+
+.summary {
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    line-height: 1.4rem;
+}
+
+.divider {
+    max-width: 80%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 2rem;
+}

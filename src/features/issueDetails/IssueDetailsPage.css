@@ -1,0 +1,17 @@
+.issueDetailsPage .markdown img {
+    max-width: 100%;
+}
+
+.issueDetailsPage .markdown pre {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 2px;
+    background-color: #f9f9f9;
+    overflow-x: auto;
+}
+
+.issueDetailsPage .markdown p > code {
+    padding: 3px 5px;
+    border-radius: 2px;
+    background-color: #f7f7f7;
+}

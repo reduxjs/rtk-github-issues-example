@@ -1,0 +1,25 @@
+.issue {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    padding: 1rem 0.5rem;
+}
+
+.issue .number {
+    font-size: 14px;
+    color: #999;
+    margin-right: 0.5rem;
+}
+
+.issue .title {
+    font-weight: bold;
+}
+
+.issue .label {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 1px 5px;
+    margin: 0 0.5rem 0.5rem 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}

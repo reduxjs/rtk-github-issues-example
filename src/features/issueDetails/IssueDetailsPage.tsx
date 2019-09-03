@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import classnames from 'classnames'
 
 import { insertMentionLinks } from 'utils/stringUtils'
-import { getIssue, getComments, Issue, Comment } from 'api/githubAPI'
+import { getComments, Comment } from 'api/githubAPI'
 import { IssueLabels } from 'components/IssueLabels'
+import { RootState } from 'app/rootReducer'
+import { fetchIssue } from 'features/issuesList/issuesSlice'
 
 import { IssueMeta } from './IssueMeta'
 import { IssueComments } from './IssueComments'
@@ -25,27 +28,27 @@ export const IssueDetailsPage = ({
   issueId,
   showIssuesList
 }: IDProps) => {
-  const [issue, setIssue] = useState<Issue | null>(null)
   const [comments, setComments] = useState<Comment[]>([])
-  const [commentsError, setCommentsError] = useState<Error | null>(null)
+  const [commentsError] = useState<Error | null>(null)
+
+  const dispatch = useDispatch()
+
+  const issue = useSelector(
+    (state: RootState) => state.issues.issuesByNumber[issueId]
+  )
 
   useEffect(() => {
-    async function fetchIssue() {
-      try {
-        setCommentsError(null)
-        const issue = await getIssue(org, repo, issueId)
-        setIssue(issue)
-      } catch (err) {
-        setCommentsError(err)
-      }
+    if (!issue) {
+      dispatch(fetchIssue(org, repo, issueId))
     }
 
-    fetchIssue()
-  }, [org, repo, issueId])
+    // Since we may have the issue already, ensure we're scrolled to the top
+    window.scrollTo({ top: 0 })
+  }, [org, repo, issueId, issue, dispatch])
 
   useEffect(() => {
     async function fetchComments() {
-      if (issue !== null) {
+      if (issue) {
         const comments = await getComments(issue.comments_url)
         setComments(comments)
       }

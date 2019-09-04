@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from 'redux-starter-kit'
 
-import { AppThunk } from 'app/store'
 
 import { RepoDetails, getRepoDetails } from 'api/githubAPI'
+import { AppThunkAction } from 'app/store';
 
 interface RepoDetailsState {
   openIssuesCount: number
@@ -36,10 +36,10 @@ export const {
 
 export default repoDetails.reducer
 
-export const fetchIssuesCount: AppThunk = (
+export const fetchIssuesCount = (
   org: string,
   repo: string
-) => async dispatch => {
+): AppThunkAction => async dispatch => {
   try {
     const repoDetails = await getRepoDetails(org, repo)
     dispatch(getRepoDetailsSuccess(repoDetails))

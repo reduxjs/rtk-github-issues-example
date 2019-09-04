@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from 'redux-starter-kit'
 import { Links } from 'parse-link-header'
 
 import { Issue, IssuesResult, getIssue, getIssues } from 'api/githubAPI'
-import { AppThunk } from 'app/store'
+import { AppThunkAction } from 'app/store'
 
 interface IssuesState {
   issuesByNumber: Record<number, Issue>
@@ -72,11 +72,11 @@ export const {
 
 export default issues.reducer
 
-export const fetchIssues: AppThunk = (
+export const fetchIssues = (
   org: string,
   repo: string,
   page?: number
-) => async dispatch => {
+): AppThunkAction => async dispatch => {
   try {
     dispatch(getIssuesStart())
     const issues = await getIssues(org, repo, page)
@@ -86,11 +86,11 @@ export const fetchIssues: AppThunk = (
   }
 }
 
-export const fetchIssue: AppThunk = (
+export const fetchIssue = (
   org: string,
   repo: string,
   number: number
-) => async dispatch => {
+): AppThunkAction => async dispatch => {
   try {
     dispatch(getIssueStart())
     const issue = await getIssue(org, repo, number)

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from 'redux-starter-kit'
 
 import { Comment, getComments, Issue } from 'api/githubAPI'
-import { AppThunk } from 'app/store'
+import { AppThunkAction } from 'app/store';
 
 interface CommentsState {
   commentsByIssue: Record<number, Comment[] | undefined>
@@ -48,7 +48,7 @@ export const {
 } = comments.actions
 export default comments.reducer
 
-export const fetchComments: AppThunk = (issue: Issue) => async dispatch => {
+export const fetchComments = (issue: Issue): AppThunkAction => async dispatch => {
   try {
     dispatch(getCommentsStart())
     const comments = await getComments(issue.comments_url)

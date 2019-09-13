@@ -71,7 +71,7 @@ export const IssuesListPage = ({
 
   return (
     <div id="issue-list-page">
-      <IssuesPageHeader openIssuesCount={openIssueCount} org={org} repo={org} />
+      <IssuesPageHeader openIssuesCount={openIssueCount} org={org} repo={repo} />
       {renderedList}
       <IssuePagination
         currentPage={currentPage}

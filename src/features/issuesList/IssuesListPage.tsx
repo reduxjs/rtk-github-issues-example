@@ -56,7 +56,7 @@ export const IssuesListPage = ({
     )
   }
 
-  const currentPage = Math.min(pageCount, Math.max(1, 1)) - 1
+  const currentPage = Math.min(pageCount, Math.max(page, 1)) - 1
 
   let renderedList = isLoading ? (
     <h3>Loading...</h3>

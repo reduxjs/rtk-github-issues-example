@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^5.6.2",
+    "@reatom/babel-plugin": "^1.0.0",
+    "@reatom/core": "^1.0.0",
+    "@reatom/debug": "^1.0.0",
+    "@reatom/react": "^1.0.0",
     "@reduxjs/toolkit": "^1.0.4",
     "@types/classnames": "^2.2.9",
     "@types/jest": "24.0.18",
@@ -15,6 +20,7 @@
     "@types/webpack-env": "^1.14.0",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
+    "craco-babel-loader": "^0.1.4",
     "parse-link-header": "^1.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -25,10 +31,9 @@
     "typescript": "3.5.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "format": "prettier --write \"src/**/*\""
   },
   "eslintConfig": {

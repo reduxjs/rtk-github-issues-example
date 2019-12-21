@@ -1,6 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-import { AppThunk } from 'app/store'
+import { declareAction, declareAtom, map, combine } from '@reatom/core'
 
 import { RepoDetails, getRepoDetails } from 'api/githubAPI'
 
@@ -14,36 +12,35 @@ const initialState: RepoDetailsState = {
   error: null
 }
 
-const repoDetails = createSlice({
-  name: 'repoDetails',
-  initialState,
-  reducers: {
-    getRepoDetailsSuccess(state, action: PayloadAction<RepoDetails>) {
-      state.openIssuesCount = action.payload.open_issues_count
-      state.error = null
-    },
-    getRepoDetailsFailed(state, action: PayloadAction<string>) {
-      state.openIssuesCount = -1
-      state.error = action.payload
+export const getRepoDetailsSuccess = declareAction<RepoDetails>()
+export const getRepoDetailsFailed = declareAction<string>()
+const repoDetailsAtom = declareAtom(initialState, on => [
+  on(getRepoDetailsSuccess, (state, payload) => ({
+    ...state,
+    openIssuesCount: payload.open_issues_count,
+    error: null
+  })),
+  on(getRepoDetailsFailed, (state, payload) => ({
+    ...state,
+    openIssuesCount: -1,
+    error: payload
+  }))
+])
+
+export const openIssuesCountAtom = map(
+  repoDetailsAtom,
+  repoDetails => repoDetails.openIssuesCount
+)
+
+export default combine({ repoDetailsAtom, openIssuesCountAtom })
+
+export const fetchIssuesCount = declareAction<{ org: string; repo: string }>(
+  async ({ org, repo }, { dispatch }) => {
+    try {
+      const repoDetails = await getRepoDetails(org, repo)
+      dispatch(getRepoDetailsSuccess(repoDetails))
+    } catch (err) {
+      dispatch(getRepoDetailsFailed(err.toString()))
     }
   }
-})
-
-export const {
-  getRepoDetailsSuccess,
-  getRepoDetailsFailed
-} = repoDetails.actions
-
-export default repoDetails.reducer
-
-export const fetchIssuesCount = (
-  org: string,
-  repo: string
-): AppThunk => async dispatch => {
-  try {
-    const repoDetails = await getRepoDetails(org, repo)
-    dispatch(getRepoDetailsSuccess(repoDetails))
-  } catch (err) {
-    dispatch(getRepoDetailsFailed(err.toString()))
-  }
-}
+)

@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { fetchIssuesCount } from 'features/repoSearch/repoDetailsSlice'
+import { useAtom } from 'utils/store'
+import {
+  fetchIssuesCount,
+  openIssuesCountAtom
+} from 'features/repoSearch/repoDetailsSlice'
 import { RootState } from 'app/rootReducer'
 
 import { IssuesPageHeader } from './IssuesPageHeader'
@@ -34,9 +38,7 @@ export const IssuesListPage = ({
     pageCount
   } = useSelector((state: RootState) => state.issues)
 
-  const openIssueCount = useSelector(
-    (state: RootState) => state.repoDetails.openIssuesCount
-  )
+  const openIssueCount = useAtom(openIssuesCountAtom)
 
   const issues = currentPageIssues.map(
     issueNumber => issuesByNumber[issueNumber]
@@ -44,7 +46,7 @@ export const IssuesListPage = ({
 
   useEffect(() => {
     dispatch(fetchIssues(org, repo, page))
-    dispatch(fetchIssuesCount(org, repo))
+    dispatch(fetchIssuesCount({ org, repo }))
   }, [org, repo, page, dispatch])
 
   if (issuesError) {

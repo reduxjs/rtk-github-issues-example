@@ -51,7 +51,7 @@ export const IssuesListPage = ({
     return (
       <div>
         <h1>Something went wrong...</h1>
-        <div>{issuesError.toString()}</div>
+        <div>{issuesError}</div>
       </div>
     )
   }

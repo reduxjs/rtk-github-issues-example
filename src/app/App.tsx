@@ -39,10 +39,6 @@ const App: React.FC = () => {
     dispatch(setCurrentPage(page))
   }
 
-  const showIssuesList = () => {
-    dispatch(setCurrentDisplayType({ displayType: 'issues' }))
-  }
-
   const showIssueComments = (issueId: number) => {
     dispatch(setCurrentDisplayType({ displayType: 'comments', issueId }))
   }
@@ -75,7 +71,6 @@ const App: React.FC = () => {
         org={org}
         repo={repo}
         issueId={issueId}
-        showIssuesList={showIssuesList}
       />
     )
   }

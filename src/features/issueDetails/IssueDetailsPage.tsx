@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import classnames from 'classnames'
@@ -11,6 +11,7 @@ import { fetchIssue } from 'features/issuesList/issuesSlice'
 import { IssueMeta } from './IssueMeta'
 import { IssueComments } from './IssueComments'
 import { fetchComments } from './commentsSlice'
+import { setCurrentDisplayType } from '../issuesDisplay/issuesDisplaySlice'
 
 import styles from './IssueDetailsPage.module.css'
 import './IssueDetailsPage.css'
@@ -19,14 +20,12 @@ interface IDProps {
   org: string
   repo: string
   issueId: number
-  showIssuesList: () => void
 }
 
 export const IssueDetailsPage = ({
   org,
   repo,
-  issueId,
-  showIssuesList
+  issueId
 }: IDProps) => {
   const dispatch = useDispatch()
 
@@ -62,8 +61,12 @@ export const IssueDetailsPage = ({
 
   let content
 
+  const showList = useCallback(() => {
+    dispatch(setCurrentDisplayType({ displayType: 'issues' }))
+  },[dispatch]);
+
   const backToIssueListButton = (
-    <button className="pure-button" onClick={showIssuesList}>
+    <button className="pure-button" onClick={showList}>
       Back to Issues List
     </button>
   )

@@ -11,7 +11,7 @@ import { fetchIssue } from 'features/issuesList/issuesSlice'
 import { IssueMeta } from './IssueMeta'
 import { IssueComments } from './IssueComments'
 import { fetchComments } from './commentsSlice'
-import { setCurrentDisplayType } from '../issuesDisplay/issuesDisplaySlice'
+import { setCurrentDisplayType } from '../../app/issuesDisplaySlice'
 
 import styles from './IssueDetailsPage.module.css'
 import './IssueDetailsPage.css'

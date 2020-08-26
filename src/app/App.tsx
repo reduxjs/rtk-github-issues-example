@@ -3,15 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from './rootReducer'
 
-import { RepoSearchForm } from 'features/repoSearch/RepoSearchForm'
+import { RepoSearchFormC } from 'features/repoSearch/RepoSearchForm'
 import { IssuesListPage } from 'features/issuesList/IssuesListPage'
 import { IssueDetailsPage } from 'features/issueDetails/IssueDetailsPage'
 
 import {
-  displayRepo,
   setCurrentDisplayType,
   setCurrentPage
-} from 'features/issuesDisplay/issuesDisplaySlice'
+} from 'app/issuesDisplaySlice'
 
 import './App.css'
 
@@ -31,10 +30,6 @@ const App: React.FC = () => {
     (state: RootState) => state.issuesDisplay
   )
 
-  const setOrgAndRepo = (org: string, repo: string) => {
-    dispatch(displayRepo({ org, repo }))
-  }
-
   const setJumpToPage = (page: number) => {
     dispatch(setCurrentPage(page))
   }
@@ -48,12 +43,7 @@ const App: React.FC = () => {
   if (displayType === 'issues') {
     content = (
       <React.Fragment>
-        <RepoSearchForm
-          org={org}
-          repo={repo}
-          setOrgAndRepo={setOrgAndRepo}
-          setJumpToPage={setJumpToPage}
-        />
+        <RepoSearchFormC/>
         <IssuesListPage
           org={org}
           repo={repo}
